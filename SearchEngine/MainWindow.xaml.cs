@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Search.Bll.Abstraction;
+
 
 namespace SearchEngine
 {
@@ -68,20 +70,42 @@ namespace SearchEngine
 
 
 
-        private void BtnStartSearch_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnStartSearch_OnClick(object sender, RoutedEventArgs e)
         {
-            //ExecuteToStream(BtnStartSearch, () => BtnStartSearch.Visibility = Visibility.Hidden);
-            var searchService = new SimleSearchService();
-            searchService.Directories.AddRange(_checkBoxsDir.Select(x => x.Tag.ToString()));
-            searchService.SearchData = TbSearchData.Text;
-            Task.Run(() =>
+            ExecuteInParallelThread(BtnStartSearch, () => BtnStartSearch.Visibility = Visibility.Hidden);
+            var directories = _checkBoxsDir.Select(x => x.Tag.ToString()).ToList();
+
+            SearchServiceBase searchService = new TextSearchEngine(directories, TbSearchData.Text);
+
+
+
+            //var searchingResult = await searchService.GetAsync(@"F:\");
+            //if (searchingResult != null)
+            //{
+            //    ExecuteInParallelThread(lblCount, () => lblCount.Content = searchingResult.Count());
+            //    foreach (var resultStringPath in searchingResult)
+            //    {
+            //        ExecuteInParallelThread(RtbResult,
+            //            () => RtbResult.AppendText($"{resultStringPath}{Environment.NewLine}"));
+            //    }
+            //}
+
+
+
+
+
+            await Task.Run(() =>
             {
+                int count = 0;
                 var searchingResult = searchService.GetYield();
-             
+
                 foreach (var resultStringPath in searchingResult)
                 {
+                    ++count;
                     ExecuteInParallelThread(RtbResult, () => RtbResult.AppendText($"{resultStringPath}{Environment.NewLine}"));
                 }
+                ExecuteInParallelThread(lblCount, () => lblCount.Content = count);
+                Console.Beep();
             });
         }
 

@@ -9,10 +9,16 @@ namespace Search.Bll.Abstraction
 {
    public abstract  class SearchServiceBase
    {
-        
-        public  List<string> Directories { get; set; }
-        public string SearchData { get; set; }
-       protected SearchServiceBase() => Directories = new List<string>();
+
+       protected IEnumerable<string> Directories { get; }
+       protected string SearchData { get; }
+
+       protected SearchServiceBase(IEnumerable<string> directories, string searchData)
+       {
+           Directories = directories;
+           SearchData = searchData;
+       }
         public abstract IEnumerable GetYield();
-    }
+      public abstract Task<IEnumerable<string>> GetAsync(string currentDir);
+   }
 }

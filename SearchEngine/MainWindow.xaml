@@ -38,6 +38,7 @@
         <TextBox x:Name="TbSearchData" HorizontalAlignment="Left" Height="23" Margin="396,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="BtnStartSearch" Click="BtnStartSearch_OnClick"  Content="Старт" HorizontalAlignment="Left" Margin="546,36,0,0" VerticalAlignment="Top" Width="75"/>
         <Grid x:Name="GridChBoxes" HorizontalAlignment="Left" Height="45" Margin="55,36,0,0" VerticalAlignment="Top" Width="224"/>
+        <Label x:Name="lblCount" Content="Label" HorizontalAlignment="Left" Margin="654,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.395,-0.346" Width="76"/>
 
     </Grid>
 </Window>

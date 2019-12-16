@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Abstraction\SearchServiceBase.cs" />
     <Compile Include="Models\SimleSearchService.cs" />
+    <Compile Include="Models\TextSearchEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
