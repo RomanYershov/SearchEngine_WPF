@@ -30,24 +30,23 @@ namespace SearchEngine
         public MainWindow()
         {
             InitializeComponent();
-            BuildDirectories();
+            BuildDirectoriesChBoxes();
 
         }
 
-        private void BuildDirectories()
+       
+        private void BuildDirectoriesChBoxes()
         {
             var drives = DriveInfo.GetDrives();
             int drivesCount = drives.Length;
             _checkBoxsDir = new List<CheckBox>(drivesCount);
             for (int i = 0; i < drivesCount; i++)
             {
-                var lbl = new Label();
                 var chBox = new CheckBox();
-                lbl.Content = drives[i];
                 chBox.Name = "chBox" + (i + 1);
                 chBox.Tag = drives[i];
                 chBox.Click += CheckBox_Click;
-                chBox.Content = lbl;
+                chBox.Content = drives[i];
                 chBox.IsChecked = true;
                 chBox.Margin = new Thickness(50 + i * 50, 0, 0, 0);
                 GridChBoxes.Children.Add(chBox);
@@ -55,6 +54,7 @@ namespace SearchEngine
             }
         }
 
+      
         public void CheckBox_Click(object sender, EventArgs e)
         {
             var curentChBox = ((CheckBox)sender);
@@ -112,6 +112,13 @@ namespace SearchEngine
         private void ExecuteInParallelThread(Control control, ResultTbDelegate callBack)
         {
             control.Dispatcher?.Invoke(DispatcherPriority.Background, new Action(callBack));
+        }
+
+    
+
+        private void SelectedOptionsRadioBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            var selectedOption = ((RadioButton)sender);
         }
     }
 }

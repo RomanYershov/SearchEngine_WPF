@@ -12,8 +12,6 @@ namespace Search.Bll.Models
 {
     public class SimleSearchService : SearchServiceBase
     {
-        private readonly Queue<string> _queue;
-
         public SimleSearchService(IEnumerable<string> directories, string searchData) 
             : base(directories, searchData)
         {
@@ -21,13 +19,14 @@ namespace Search.Bll.Models
 
         public override IEnumerable GetYield()
         {
+            Queue<string> queue = new Queue<string>();
             foreach (var directory in Directories)
             {
-                _queue.Enqueue(directory);
-                while (_queue.Count > 0)
+                queue.Enqueue(directory);
+                while (queue.Count > 0)
                 {
                     string[] fileInfo;
-                    var currentDirPath = _queue.Dequeue();
+                    var currentDirPath = queue.Dequeue();
                     try
                     {
                         fileInfo = Directory.GetFiles(currentDirPath);
@@ -36,7 +35,7 @@ namespace Search.Bll.Models
                     {
                         continue;
                     }
-                    var searchingFiles = fileInfo.Where(x => x.ToLower().Contains(SearchData));
+                    var searchingFiles = fileInfo.Where(x => x.ToLower().Contains(SearchData.ToLower()));
                     if (searchingFiles.Any())
                     {
                         foreach (var searchingFile in searchingFiles)
@@ -47,7 +46,7 @@ namespace Search.Bll.Models
                     var childDirectories = Directory.GetDirectories(currentDirPath);
                     foreach (var childDir in childDirectories)
                     {
-                        _queue.Enqueue(childDir);
+                        queue.Enqueue(childDir);
                     }
                 }
             }
@@ -55,6 +54,8 @@ namespace Search.Bll.Models
 
         public override async Task<IEnumerable<string>> GetAsync(string currentDir)
         {
+            
+
             List<string> buffer = new List<string>();
 
 
@@ -93,9 +94,6 @@ namespace Search.Bll.Models
 
         }
 
-        private async Task GetDir(string dir)
-        {
-
-        }
+       
     }
 }

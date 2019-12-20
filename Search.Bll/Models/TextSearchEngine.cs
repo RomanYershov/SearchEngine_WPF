@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using GemBox.Document;
 using Search.Bll.Abstraction;
+using Xceed.Document.NET;
+using Xceed.Words.NET;
 
 namespace Search.Bll.Models
 {
@@ -35,6 +40,7 @@ namespace Search.Bll.Models
                         continue;
                     }
                     var resFiles = files.Where(FindText);
+
                     foreach (var file in resFiles)
                     {
                         yield return file;
@@ -64,10 +70,22 @@ namespace Search.Bll.Models
             var resF = format.Last();
             if (searchFormatPattern.Contains(resF))
             {
+              
+                
                 try
                 {
-                    var allText = File.ReadAllText(filePath);
-                    return allText.Contains(SearchData);
+                    string allText;
+                    if (resF == "doc")
+                    {
+                        ComponentInfo.SetLicense("FREE-LIMITED-KEY");//todo: без лицензии не работает
+                         allText = DocumentModel.Load(filePath).Content.ToString();
+                    }
+                    else
+                    {
+                        allText = File.ReadAllText(filePath);
+                    }
+                    
+                    return allText.ToLower().Contains(SearchData.ToLower());
                 }
                 catch (Exception e)
                 {
@@ -75,6 +93,17 @@ namespace Search.Bll.Models
                 }
             }
             return false;
+        }
+
+
+        private  Stream GetStreamFromUrl(string url)
+        {
+            byte[] imageData = null;
+            using (var wc = new WebClient())
+            {
+                imageData = wc.DownloadData(url);
+            }
+            return new MemoryStream(imageData);
         }
     }
 }

@@ -35,10 +35,12 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <TextBox x:Name="TbSearchData" HorizontalAlignment="Left" Height="23" Margin="396,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="BtnStartSearch" Click="BtnStartSearch_OnClick"  Content="Старт" HorizontalAlignment="Left" Margin="546,36,0,0" VerticalAlignment="Top" Width="75"/>
-        <Grid x:Name="GridChBoxes" HorizontalAlignment="Left" Height="45" Margin="55,36,0,0" VerticalAlignment="Top" Width="224"/>
-        <Label x:Name="lblCount" Content="Label" HorizontalAlignment="Left" Margin="654,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.395,-0.346" Width="76"/>
+        <TextBox x:Name="TbSearchData" HorizontalAlignment="Left" Height="23" Margin="570,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtnStartSearch" Click="BtnStartSearch_OnClick"  Content="Старт" HorizontalAlignment="Left" Margin="706,49,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid x:Name="GridChBoxes" HorizontalAlignment="Left" Height="45" Margin="22,24,0,0" VerticalAlignment="Top" Width="253"/>
+        <Label x:Name="lblCount" Content="Label" HorizontalAlignment="Left" Margin="706,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.395,-0.346" Width="76"/>
+        <RadioButton x:Name="rbSearchFiles" Content="по файлам" HorizontalAlignment="Left" Margin="371,24,0,0" VerticalAlignment="Top" GroupName="searchOptions" IsChecked="True" Click="SelectedOptionsRadioBtn_OnClick"/>
+        <RadioButton x:Name="rbSearchText" Content="по тексу" HorizontalAlignment="Left" Margin="371,46,0,0" VerticalAlignment="Top" GroupName="searchOptions" Click="SelectedOptionsRadioBtn_OnClick"/>
 
     </Grid>
 </Window>
