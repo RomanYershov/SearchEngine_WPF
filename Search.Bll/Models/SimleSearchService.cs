@@ -12,6 +12,7 @@ namespace Search.Bll.Models
 {
     public class SimleSearchService : SearchServiceBase
     {
+        public SimleSearchService() : base() { }
         public SimleSearchService(IEnumerable<string> directories, string searchData) 
             : base(directories, searchData)
         {

@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SearchEngine"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="MyWindow">
-        <RichTextBox x:Name="RtbResult" HorizontalAlignment="Left" Height="294" Margin="125,99,0,0" VerticalAlignment="Top" Width="657">
+        Title="MainWindow" Height="511" Width="800">
+    <Grid x:Name="MyWindow" Background="#FF57A4A1">
+        <Grid.OpacityMask>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="#FF994242" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.OpacityMask>
+        <RichTextBox x:Name="RtbResult" HorizontalAlignment="Left" Height="328" Margin="66,99,0,0" VerticalAlignment="Top" Width="657" Foreground="White" AllowDrop="True" Background="#FF334F5F" IsHitTestVisible="False">
             <RichTextBox.SelectionBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFD15252" Offset="0.226"/>
@@ -22,25 +28,18 @@
                     <GradientStop Color="#FF522020" Offset="0.486"/>
                 </LinearGradientBrush>
             </RichTextBox.CaretBrush>
-            <FlowDocument>
+            <FlowDocument OverridesDefaultStyle="True">
                 <Paragraph>
                     <Run Text="RichTextBox"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <RichTextBox x:Name="RtbProcess" HorizontalAlignment="Left" Height="100" Margin="10,99,0,0" VerticalAlignment="Top" Width="100">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <TextBox x:Name="TbSearchData" HorizontalAlignment="Left" Height="23" Margin="570,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="BtnStartSearch" Click="BtnStartSearch_OnClick"  Content="Старт" HorizontalAlignment="Left" Margin="706,49,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="TbSearchData" HorizontalAlignment="Left" Height="23" Margin="507,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="BtnStartSearch" Click="BtnStartSearch_OnClick"  Content="Старт" HorizontalAlignment="Left" Margin="507,55,0,0" VerticalAlignment="Top" Width="120" Background="#FF00DAF0"/>
         <Grid x:Name="GridChBoxes" HorizontalAlignment="Left" Height="45" Margin="22,24,0,0" VerticalAlignment="Top" Width="253"/>
-        <Label x:Name="lblCount" Content="Label" HorizontalAlignment="Left" Margin="706,18,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.395,-0.346" Width="76"/>
-        <RadioButton x:Name="rbSearchFiles" Content="по файлам" HorizontalAlignment="Left" Margin="371,24,0,0" VerticalAlignment="Top" GroupName="searchOptions" IsChecked="True" Click="SelectedOptionsRadioBtn_OnClick"/>
-        <RadioButton x:Name="rbSearchText" Content="по тексу" HorizontalAlignment="Left" Margin="371,46,0,0" VerticalAlignment="Top" GroupName="searchOptions" Click="SelectedOptionsRadioBtn_OnClick"/>
+        <Label x:Name="lblCount" Content="" HorizontalAlignment="Left" Margin="647,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.395,-0.346" Width="76"/>
+        <RadioButton x:Name="rbSearchFiles" Content="по файлам" HorizontalAlignment="Left" Margin="371,24,0,0" VerticalAlignment="Top" GroupName="searchOptions" IsChecked="True" Click="SelectedOptionsRadioBtn_OnClick" Tag="file"/>
+        <RadioButton x:Name="rbSearchText" Content="по тексу" HorizontalAlignment="Left" Margin="371,46,0,0" VerticalAlignment="Top" GroupName="searchOptions" Click="SelectedOptionsRadioBtn_OnClick" Tag="text"/>
 
     </Grid>
 </Window>

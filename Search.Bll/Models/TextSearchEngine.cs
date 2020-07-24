@@ -16,6 +16,7 @@ namespace Search.Bll.Models
 {
     public class TextSearchEngine : SearchServiceBase
     {
+        public TextSearchEngine() : base() { }
         public TextSearchEngine(IEnumerable<string> directories, string searchData) : base(directories, searchData)
         {
         }

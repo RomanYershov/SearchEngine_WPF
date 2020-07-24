@@ -27,11 +27,13 @@ namespace SearchEngine
     {
         private delegate void ResultTbDelegate();   
         private List<CheckBox> _checkBoxsDir;
+        private  SearchServiceBase _searchService;
         public MainWindow()
         {
             InitializeComponent();
             BuildDirectoriesChBoxes();
-
+            _searchService = new SimleSearchService();
+            RtbResult.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         }
 
        
@@ -72,11 +74,10 @@ namespace SearchEngine
 
         private async void BtnStartSearch_OnClick(object sender, RoutedEventArgs e)
         {
-            ExecuteInParallelThread(BtnStartSearch, () => BtnStartSearch.Visibility = Visibility.Hidden);
+            ExecuteInParallelThread(BtnStartSearch, () => BtnStartSearch.IsEnabled = false);
             var directories = _checkBoxsDir.Select(x => x.Tag.ToString()).ToList();
-
-            SearchServiceBase searchService = new TextSearchEngine(directories, TbSearchData.Text);
-
+            _searchService.Directories = directories;
+            _searchService.SearchData = TbSearchData.Text;
 
 
             //var searchingResult = await searchService.GetAsync(@"F:\");
@@ -97,7 +98,7 @@ namespace SearchEngine
             await Task.Run(() =>
             {
                 int count = 0;
-                var searchingResult = searchService.GetYield();
+                var searchingResult = _searchService.GetYield();
 
                 foreach (var resultStringPath in searchingResult)
                 {
@@ -105,6 +106,7 @@ namespace SearchEngine
                     ExecuteInParallelThread(RtbResult, () => RtbResult.AppendText($"{resultStringPath}{Environment.NewLine}"));
                 }
                 ExecuteInParallelThread(lblCount, () => lblCount.Content = count);
+                ExecuteInParallelThread(BtnStartSearch, () => BtnStartSearch.IsEnabled = true);
                 Console.Beep();
             });
         }
@@ -119,6 +121,10 @@ namespace SearchEngine
         private void SelectedOptionsRadioBtn_OnClick(object sender, RoutedEventArgs e)
         {
             var selectedOption = ((RadioButton)sender);
+            if (selectedOption.Tag.ToString().Contains("file"))
+                _searchService = new SimleSearchService();
+            else if(selectedOption.Tag.ToString().Contains("text"))
+                _searchService = new TextSearchEngine();
         }
     }
 }
