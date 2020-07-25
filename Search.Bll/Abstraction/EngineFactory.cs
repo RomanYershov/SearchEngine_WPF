@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Search.Bll.Abstraction
 {
-   public abstract class EngineFactory
+   public interface IEngineFactory
    {
-       public abstract SearchServiceBase Create();
+        SearchServiceBase Create();
    }
 }

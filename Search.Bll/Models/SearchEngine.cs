@@ -11,9 +11,9 @@ namespace Search.Bll.Models
     public class SearchEngine
     {
         private readonly SearchServiceBase searchService;
-        public SearchEngine(EngineFactory fabrica, List<string> directories, string searchText)
+        public SearchEngine(IEngineFactory engineFactory, List<string> directories, string searchText)
         {
-            searchService = fabrica.Create();
+            searchService = engineFactory.Create();
             searchService.Directories = directories;
             searchService.SearchData = searchText;
         }

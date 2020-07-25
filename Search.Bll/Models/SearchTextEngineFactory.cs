@@ -7,9 +7,9 @@ using Search.Bll.Abstraction;
 
 namespace Search.Bll.Models
 {
-   public class SearchTextEngineFactory : EngineFactory
+   public class SearchTextEngineFactory : IEngineFactory
     {
-        public override SearchServiceBase Create()
+        public  SearchServiceBase Create()
         {
             return new TextSearchService();
         }

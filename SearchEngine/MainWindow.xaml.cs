@@ -27,7 +27,7 @@ namespace SearchEngine
     {
         private delegate void ResultTbDelegate();   
         private List<CheckBox> _checkBoxsDir;
-        private  EngineFactory _engineFactory;
+        private  IEngineFactory _engineFactory;
         public MainWindow()
         {
             InitializeComponent();
