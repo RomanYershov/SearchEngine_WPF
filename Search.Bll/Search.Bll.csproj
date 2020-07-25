@@ -50,9 +50,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstraction\EngineFactory.cs" />
     <Compile Include="Abstraction\SearchServiceBase.cs" />
-    <Compile Include="Models\SimleSearchService.cs" />
-    <Compile Include="Models\TextSearchEngine.cs" />
+    <Compile Include="Models\SearchEngine.cs" />
+    <Compile Include="Models\SearchFileEngineFactory.cs" />
+    <Compile Include="Models\SearchTextEngineFactory.cs" />
+    <Compile Include="Models\FileSearchService.cs" />
+    <Compile Include="Models\TextSearchService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

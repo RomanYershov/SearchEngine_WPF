@@ -27,12 +27,12 @@ namespace SearchEngine
     {
         private delegate void ResultTbDelegate();   
         private List<CheckBox> _checkBoxsDir;
-        private  SearchServiceBase _searchService;
+        private  EngineFactory _engineFactory;
         public MainWindow()
         {
             InitializeComponent();
             BuildDirectoriesChBoxes();
-            _searchService = new SimleSearchService();
+            _engineFactory = new SearchFileEngineFactory();
             RtbResult.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         }
 
@@ -76,30 +76,12 @@ namespace SearchEngine
         {
             ExecuteInParallelThread(BtnStartSearch, () => BtnStartSearch.IsEnabled = false);
             var directories = _checkBoxsDir.Select(x => x.Tag.ToString()).ToList();
-            _searchService.Directories = directories;
-            _searchService.SearchData = TbSearchData.Text;
-
-
-            //var searchingResult = await searchService.GetAsync(@"F:\");
-            //if (searchingResult != null)
-            //{
-            //    ExecuteInParallelThread(lblCount, () => lblCount.Content = searchingResult.Count());
-            //    foreach (var resultStringPath in searchingResult)
-            //    {
-            //        ExecuteInParallelThread(RtbResult,
-            //            () => RtbResult.AppendText($"{resultStringPath}{Environment.NewLine}"));
-            //    }
-            //}
-
-
-
-
-
+            Search.Bll.Models.SearchEngine searchEngine = new Search.Bll.Models.SearchEngine(_engineFactory, directories,TbSearchData.Text);
+            
             await Task.Run(() =>
             {
                 int count = 0;
-                var searchingResult = _searchService.GetYield();
-
+                var searchingResult = searchEngine.GetData();
                 foreach (var resultStringPath in searchingResult)
                 {
                     ++count;
@@ -122,9 +104,14 @@ namespace SearchEngine
         {
             var selectedOption = ((RadioButton)sender);
             if (selectedOption.Tag.ToString().Contains("file"))
-                _searchService = new SimleSearchService();
+                _engineFactory = new SearchFileEngineFactory();
             else if(selectedOption.Tag.ToString().Contains("text"))
-                _searchService = new TextSearchEngine();
+                _engineFactory = new SearchTextEngineFactory();
+        }
+
+        private void BtnPuse_Click(object sender, RoutedEventArgs e)
+        {
+            ExecuteInParallelThread(BtnStartSearch, () => BtnStartSearch.IsEnabled = true);
         }
     }
 }

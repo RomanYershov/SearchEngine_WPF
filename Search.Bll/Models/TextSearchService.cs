@@ -14,10 +14,10 @@ using Xceed.Words.NET;
 
 namespace Search.Bll.Models
 {
-    public class TextSearchEngine : SearchServiceBase
+    public class TextSearchService : SearchServiceBase
     {
-        public TextSearchEngine() : base() { }
-        public TextSearchEngine(IEnumerable<string> directories, string searchData) : base(directories, searchData)
+        public TextSearchService() : base() { }
+        public TextSearchService(IEnumerable<string> directories, string searchData) : base(directories, searchData)
         {
         }
 

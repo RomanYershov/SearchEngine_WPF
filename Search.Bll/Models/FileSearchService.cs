@@ -10,10 +10,10 @@ using Search.Bll.Abstraction;
 
 namespace Search.Bll.Models
 {
-    public class SimleSearchService : SearchServiceBase
+    public class FileSearchService : SearchServiceBase
     {
-        public SimleSearchService() : base() { }
-        public SimleSearchService(IEnumerable<string> directories, string searchData) 
+        public FileSearchService() : base() { }
+        public FileSearchService(IEnumerable<string> directories, string searchData) 
             : base(directories, searchData)
         {
         }
