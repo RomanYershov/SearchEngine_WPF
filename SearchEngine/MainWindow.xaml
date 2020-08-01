@@ -13,27 +13,6 @@
                 <GradientStop Color="#FF994242" Offset="1"/>
             </LinearGradientBrush>
         </Grid.OpacityMask>
-        <RichTextBox x:Name="RtbResult" HorizontalAlignment="Left" Height="318" Margin="66,109,0,0" VerticalAlignment="Top" Width="657" Foreground="White" AllowDrop="True" Background="#FF334F5F" IsHitTestVisible="False">
-            <RichTextBox.SelectionBrush>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFD15252" Offset="0.226"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </RichTextBox.SelectionBrush>
-            <RichTextBox.CaretBrush>
-                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="#FFA04040"/>
-                    <GradientStop Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}" Offset="0.486"/>
-                    <GradientStop Color="#FF522020" Offset="0.486"/>
-                </LinearGradientBrush>
-            </RichTextBox.CaretBrush>
-            <FlowDocument OverridesDefaultStyle="True">
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
         <TextBox x:Name="TbSearchData" HorizontalAlignment="Left" Height="26" Margin="502,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="BtnStartSearch" Click="BtnStartSearch_OnClick"  Content="Старт" HorizontalAlignment="Left" Margin="502,47,0,0" VerticalAlignment="Top" Width="120" Background="#FF00DAF0" Height="24"/>
         <Grid x:Name="GridChBoxes" HorizontalAlignment="Left" Height="45" Margin="22,24,0,0" VerticalAlignment="Top" Width="253"/>
@@ -41,6 +20,13 @@
         <RadioButton x:Name="rbSearchFiles" Content="по файлам" HorizontalAlignment="Left" Margin="366,11,0,0" VerticalAlignment="Top" GroupName="searchOptions" IsChecked="True" Click="SelectedOptionsRadioBtn_OnClick" Tag="file" Height="18"/>
         <RadioButton x:Name="rbSearchText" Content="по тексу" HorizontalAlignment="Left" Margin="366,36,0,0" VerticalAlignment="Top" GroupName="searchOptions" Click="SelectedOptionsRadioBtn_OnClick" Tag="text" Height="18"/>
         <Button x:Name="btnPuse" Content="Пауза" HorizontalAlignment="Left" Margin="502,75,0,0" VerticalAlignment="Top" Width="120" Height="20" Background="#FF5BB656" Click="BtnPuse_Click"/>
+        <RichTextBox x:Name="RtbResult" HorizontalAlignment="Left" Height="324" Margin="22,111,0,0" VerticalAlignment="Top" Width="746">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="RichTextBox"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
     </Grid>
 </Window>

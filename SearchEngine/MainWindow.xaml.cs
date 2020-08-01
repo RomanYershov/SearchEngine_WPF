@@ -34,6 +34,7 @@ namespace SearchEngine
             BuildDirectoriesChBoxes();
             _engineFactory = new SearchFileEngineFactory();
             RtbResult.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+            RtbResult.AllowDrop = true;
         }
 
        
